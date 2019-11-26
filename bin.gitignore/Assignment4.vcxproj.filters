@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\ted_D\Desktop\Project\asteroid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ted_D\Desktop\Project\camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ted_D\Desktop\Project\game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ted_D\Desktop\Project\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ted_D\Desktop\Project\resource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ted_D\Desktop\Project\resource_manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ted_D\Desktop\Project\scene_graph.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ted_D\Desktop\Project\scene_node.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\ted_D\Desktop\Project\asteroid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ted_D\Desktop\Project\camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ted_D\Desktop\Project\game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ted_D\Desktop\Project\model_loader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ted_D\Desktop\Project\resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ted_D\Desktop\Project\resource_manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ted_D\Desktop\Project\scene_graph.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ted_D\Desktop\Project\scene_node.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\ted_D\Desktop\Project\material_fp.glsl" />
+    <None Include="C:\Users\ted_D\Desktop\Project\material_vp.glsl" />
+    <None Include="C:\Users\ted_D\Desktop\Project\textured_material_fp.glsl" />
+    <None Include="C:\Users\ted_D\Desktop\Project\textured_material_vp.glsl" />
+    <None Include="C:\Users\ted_D\Desktop\Project\three-term_shiny_blue_fp.glsl" />
+    <None Include="C:\Users\ted_D\Desktop\Project\three-term_shiny_blue_vp.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{020A2F28-AE05-387E-99BC-3B940761436A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{EAA4C369-EAB7-3787-A1F7-40DC22BDFFFE}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
