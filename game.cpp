@@ -130,10 +130,6 @@ void Game::SetupResources(void){
     std::string filename = std::string(MATERIAL_DIRECTORY) + std::string("/three-term_shiny_blue");
     resman_.LoadResource(Material, "ShinyBlueMaterial", filename.c_str());
 
-    // Load a cube from an obj file
-    filename = std::string(MATERIAL_DIRECTORY) + std::string("/cube.obj");
-    resman_.LoadResource(Mesh, "CubeMesh", filename.c_str());
-
     // Load texture to be applied to the cube
     filename = std::string(MATERIAL_DIRECTORY) + std::string("/checker.png");
     resman_.LoadResource(Texture, "Checker", filename.c_str());
@@ -163,19 +159,11 @@ void Game::SetupScene(void){
     torus->Scale(glm::vec3(1.5, 1.5, 1.5));
     torus->Translate(glm::vec3(-1.4, 0.0, 0.0));
 
-    // Create an instance of the textured cube
-    game::SceneNode *cube = CreateInstance("CubeInstance1", "CubeMesh", "TexturedMaterial", "Checker");
-    // Adjust the instance
-    cube->Scale(glm::vec3(0.7, 0.7, 0.7));
-    glm::quat rotation = glm::angleAxis(-45.0f * -glm::pi<float>()/180.0f, glm::vec3(1.0, 0.0, 0.0));
-    cube->Rotate(rotation);
-    rotation = glm::angleAxis(-45.0f * -glm::pi<float>()/180.0f, glm::vec3(0.0, 1.0, 0.0));
-    cube->Rotate(rotation);
-    cube->Translate(glm::vec3(1.4, 0.0, 0.0));
-
 	CreateTurret();
 	CreateBird();
 	CreateChicken();
+	CreateHen();
+	CreateDrone();
 }
 
 
@@ -187,6 +175,7 @@ void Game::CreateBird() {
 	resman_.CreateTriangle("Bird_wings_tip", 0.1, 0.3, 0.1, 0.66, false);
 	//							float thick, float bot, float top, float height, bool tip
 	resman_.CreateTriangle("Bird_beak", 0.2, 0.2, 0.03, 0.39, true);
+	resman_.CreateTail("Bird_tail", 0.2, 0.2);
 
 	game::SceneNode *Body = CreateInstance("Body", "Bird_body", "TexturedMaterial", "White");
 	Body->Scale(glm::vec3(1.0, 1.0, 1.0));
@@ -237,6 +226,13 @@ void Game::CreateBird() {
 	Beak->Translate(glm::vec3(0.0, 1.16, 0.37));
 	Beak->SetOwnTran();
 
+	
+	game::SceneNode *Tail = CreateInstance("Tail", "Bird_tail", "TexturedMaterial", "White");
+	Tail->Scale(glm::vec3(1.0, 1.0, 1.0));
+	glm::quat rotation_Tail = glm::angleAxis(12 * glm::pi<float>() / 180.0f, glm::vec3(1.0, 0.0, 0.0));
+	Tail->Rotate(rotation_Tail);
+	Tail->Translate(glm::vec3(0.0, -0.7, -0.1));
+	Tail->SetOwnTran();
 
 	Head->setBaBa(Body);
 	LWing->setBaBa(Body);
@@ -244,7 +240,9 @@ void Game::CreateBird() {
 	Beak->setBaBa(Body);
 	LWing_tip->setBaBa(LWing);
 	RWing_tip->setBaBa(LWing);
+	Tail->setBaBa(Body);
 }
+
 
 void Game::CreateChicken() {
 	resman_.CreateSphere("CK_Body", 0.44,0.33,0.33);
@@ -289,7 +287,99 @@ void Game::CreateChicken() {
 }
 
 
+void Game::CreateHen() {
+	//							float thick, float bot, float top, float height
+	resman_.CreateTriangle("Hen_wings", 0.06, 0.4, 0.099, 0.66, true);
 
+	game::SceneNode *Hen_Body = CreateInstance("Hen_Body", "CK_Body", "TexturedMaterial", "White");
+	Hen_Body->Scale(glm::vec3(2.5, 2.2, 2.0));
+	Hen_Body->Translate(glm::vec3(3, 0, 20));
+	Hen_Body->SetOwnTran();
+
+	game::SceneNode *Hen_Head = CreateInstance("Hen_Head", "CK_Head", "TexturedMaterial", "White");
+	Hen_Head->Scale(glm::vec3(1.0, 1.0, 1.0));
+	Hen_Head->Translate(glm::vec3(-0.36, 0.36, 0));
+	Hen_Head->SetOwnTran();
+
+	game::SceneNode *Hen_Beak = CreateInstance("Hen_Beak", "CK_Beak", "TexturedMaterial", "White");
+	Hen_Beak->Scale(glm::vec3(1.0, 1.0, 1.0));
+	glm::quat rotation_Hen_Beak = glm::angleAxis(-90 * glm::pi<float>() / 180.0f, glm::vec3(0.0, 0.0, 1.0));
+	Hen_Beak->Rotate(rotation_Hen_Beak);
+	rotation_Hen_Beak = glm::angleAxis(180 * glm::pi<float>() / 180.0f, glm::vec3(1.0, 0.0, 0.0));
+	Hen_Beak->Rotate(rotation_Hen_Beak);
+	Hen_Beak->Translate(glm::vec3(-0.7, -0.45, 0));
+	Hen_Beak->SetOwnTran();
+
+	game::SceneNode *Hen_Lleg = CreateInstance("Hen_Lleg", "CK_Legs", "TexturedMaterial", "White");
+	Hen_Lleg->Scale(glm::vec3(1.0, 1.0, 1.0));
+	Hen_Lleg->Translate(glm::vec3(0, -0.4, 0.15));
+	Hen_Lleg->SetOwnTran();
+
+	game::SceneNode *Hen_Rleg = CreateInstance("Hen_Rleg", "CK_Legs", "TexturedMaterial", "White");
+	Hen_Rleg->Scale(glm::vec3(1.0, 1.0, 1.0));
+	Hen_Rleg->Translate(glm::vec3(0, -0.4, -0.15));
+	Hen_Rleg->SetOwnTran();
+
+	game::SceneNode *Hen_LWing = CreateInstance("Hen_LWing", "Hen_wings", "TexturedMaterial", "White");
+	Hen_LWing->Scale(glm::vec3(1.0, 1.0, 1.0));
+	glm::quat rotation_Hen_Wing = glm::angleAxis(90 * glm::pi<float>() / 180.0f, glm::vec3(1.0, 0.0, 0.0));
+	Hen_LWing->Rotate(rotation_Hen_Wing);
+	Hen_LWing->Translate(glm::vec3(0.3, 0.0, 0.66));
+	Hen_LWing->SetOwnTran();
+
+	game::SceneNode *Hen_RWing = CreateInstance("Hen_RWing", "Hen_wings", "TexturedMaterial", "White");
+	Hen_RWing->Scale(glm::vec3(1.0, 1.0, 1.0));
+	rotation_Hen_Wing = glm::angleAxis(-90 * glm::pi<float>() / 180.0f, glm::vec3(1.0, 0.0, 0.0));
+	Hen_RWing->Rotate(rotation_Hen_Wing);
+	Hen_RWing->Translate(glm::vec3(0.3, 0, -0.66));
+	Hen_RWing->SetOwnTran();
+
+
+	Hen_Head->setBaBa(Hen_Body);
+	Hen_Beak->setBaBa(Hen_Head);
+	Hen_Lleg->setBaBa(Hen_Body);
+	Hen_Rleg->setBaBa(Hen_Body);
+	Hen_LWing->setBaBa(Hen_Body);
+	Hen_RWing->setBaBa(Hen_Body);
+}
+
+void Game::CreateDrone() {
+	resman_.CreateCylinder("Drone_Body", 0.22, 0.3);
+	resman_.CreateCylinder("Drone_Center", 0.046, 0.27);
+	//							float thick, float bot, float top, float height
+	resman_.CreateTrape("Drone_Prop", 0.04, 0.04, 0.04, 0.7);
+
+	game::SceneNode *Drone_Body = CreateInstance("Drone_Body", "Drone_Body", "TexturedMaterial", "White");
+	Drone_Body->Scale(glm::vec3(1.0, 1.0, 1.0));
+	Drone_Body->Translate(glm::vec3(0, 0, 0));
+	Drone_Body->SetOwnTran();
+
+	game::SceneNode *Drone_Center = CreateInstance("Drone_Center", "Drone_Center", "TexturedMaterial", "White");
+	Drone_Center->Scale(glm::vec3(1.0, 1.0, 1.0));
+	Drone_Center->Translate(glm::vec3(0, 0.27, 0));
+	Drone_Center->SetOwnTran();
+
+	game::SceneNode *Drone_Prop1 = CreateInstance("Drone_Prop", "Drone_Prop", "TexturedMaterial", "White");
+	Drone_Prop1->Scale(glm::vec3(1.0, 1.0, 1.0));
+	glm::quat rotation_Prop1 = glm::angleAxis(90 * glm::pi<float>() / 180.0f, glm::vec3(0.0, 0.0, 1.0));
+	Drone_Prop1->Rotate(rotation_Prop1);
+	Drone_Prop1->Translate(glm::vec3(-0.16, 0.6, 0));
+	Drone_Prop1->SetOwnTran();
+
+	game::SceneNode *Drone_Prop2 = CreateInstance("Drone_Prop", "Drone_Prop", "TexturedMaterial", "White");
+	Drone_Prop2->Scale(glm::vec3(1.0, 1.0, 1.0));
+	glm::quat rotation_Prop2 = glm::angleAxis(90 * glm::pi<float>() / 180.0f, glm::vec3(0.0, 0.0, 1.0));
+	Drone_Prop2->Rotate(rotation_Prop2);
+	rotation_Prop2 = glm::angleAxis(90 * glm::pi<float>() / 180.0f, glm::vec3(1.0, 0.0, 0.0));
+	Drone_Prop2->Rotate(rotation_Prop2);
+	Drone_Prop2->Translate(glm::vec3(-0.0, 0.6, 0.16));
+	Drone_Prop2->SetOwnTran();
+
+
+	Drone_Center->setBaBa(Drone_Body);
+	Drone_Prop1->setBaBa(Drone_Center);
+	Drone_Prop2->setBaBa(Drone_Center);
+}
 
 void Game::CreateTurret() {
 
@@ -349,12 +439,10 @@ void Game::MainLoop(void){
                 glm::quat rotation = glm::angleAxis(glm::pi<float>()/180.0f, glm::vec3(0.0, 1.0, 0.0));
                 node->Rotate(rotation);
 
-                // Animate the cube
-                node = scene_.GetNode("CubeInstance1");
-                rotation = glm::angleAxis(glm::pi<float>()/180.0f, glm::vec3(0.0, 0.0, 1.0));
-                node->Rotate(rotation);
-                rotation = glm::angleAxis(2.0f * glm::pi<float>()/180.0f, glm::vec3(1.0, 0.0, 0.0));
-                node->Rotate(rotation);
+				SceneNode *node1 = scene_.GetNode("Drone_Center");
+				glm::quat rotation1 = glm::angleAxis(10 * glm::pi<float>() / 180.0f, glm::vec3(0.0, 1.0, 0.0));
+				node1->Rotate(rotation1);
+
 
 
 				if (angle <= lowAn && increasement < 0) {

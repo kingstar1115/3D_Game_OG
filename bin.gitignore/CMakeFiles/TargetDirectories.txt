@@ -1,2 +1,0 @@
-C:/Users/ted_D/Desktop/Project/bin/CMakeFiles/Assignment4.dir
-C:/Users/ted_D/Desktop/Project/bin/CMakeFiles/ALL_BUILD.dir

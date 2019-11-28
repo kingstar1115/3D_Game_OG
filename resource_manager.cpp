@@ -544,7 +544,7 @@ void ResourceManager::CreatePyramid(std::string object_name, float bot, float to
 	AddResource(Mesh, object_name, vbo, ebo, 12 * face_att);
 }
 
-// Bird big wings
+// Bird big wingsq
 void ResourceManager::CreateTrape(std::string object_name, float thick, float bot, float top, float height) {
 
 
@@ -698,6 +698,54 @@ void ResourceManager::CreateSphere(std::string object_name, float radius_x, floa
 
     // Create resource
     AddResource(Mesh, object_name, vbo, ebo, face_num * face_att);
+}
+
+void ResourceManager::CreateTail(const std::string object_name, float tail_diff, float thick) {
+
+	// Number of attributes for vertices and faces
+	const int vertex_att = 11;
+	const int face_att = 3;
+
+	float half_thick = thick / 2;
+
+		// Data buffers 
+		GLfloat vertex[] = {
+		//position							normal			color			uv
+		//top 2 point
+		0,0.5,half_thick,					0.0,0.0,0.0,	0.5,0.5,0.5,	0.5,0.5,
+		0,0.5,-half_thick,					0.0,0.0,0.0,	0.5,0.5,0.5,	0.5,0.5,
+		//bot 4 point
+		-1.5*tail_diff, 0.4 - 2 * tail_diff, 0,	0.0,0.0,0.0,	0.5,0.5,0.5,	0.5,0.5,
+		-0.5*tail_diff, 0.4 - 2.5 * tail_diff, 0,	0.0,0.0,0.0,	0.5,0.5,0.5,	0.5,0.5,
+		0.5*tail_diff, 0.4 - 2.5 * tail_diff, 0,	0.0,0.0,0.0,	0.5,0.5,0.5,	0.5,0.5,
+		1.5*tail_diff, 0.4 - 2 * tail_diff, 0,	0.0,0.0,0.0,	0.5,0.5,0.5,	0.5,0.5,
+
+	};
+
+	GLuint face[] = {
+		0,2,3,
+		0,3,4,
+		0,4,5,
+		1,2,3,
+		1,3,4,
+		1,4,5,
+		0,1,2,
+		1,0,5,
+	};
+
+
+	GLuint vbo, ebo;
+	glGenBuffers(1, &vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBufferData(GL_ARRAY_BUFFER, 6 * vertex_att * sizeof(GLfloat), vertex, GL_STATIC_DRAW);
+
+	glGenBuffers(1, &ebo);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 8 * face_att * sizeof(GLuint), face, GL_STATIC_DRAW);
+
+
+	// Create resource
+	AddResource(Mesh, object_name, vbo, ebo, 12 * face_att);
 }
 
 

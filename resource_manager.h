@@ -39,6 +39,8 @@ namespace game {
 			void CreateTriangle(std::string object_name, float thick, float bot, float top, float height, bool tip);
 			void CreatePyramid(std::string object_name, float bot, float top, float height);
 			void CreateTrape(std::string object_name, float thick, float bot, float top, float height);
+			// specially for tail
+			void CreateTail(std::string object_name, float tail_diff, float thick);
 
         private:
             // List storing all resources

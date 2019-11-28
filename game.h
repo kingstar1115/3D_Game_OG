@@ -78,6 +78,8 @@ namespace game {
 			void CreateTurret();
 			void CreateBird();
 			void CreateChicken();
+			void CreateHen();
+			void CreateDrone();
 
     }; // class Game
 
