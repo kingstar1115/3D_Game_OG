@@ -1,6 +1,8 @@
-Weihang chen  101084865
-Heqing wang   101051240
-Kaiwen mao    101048300
+Created By:
+
+	Weihang chen  101084865
+	Heqing wang   101051240
+	Kaiwen mao    101048300
 
 How to setup the project:
 	Extract all the files from .zip file
