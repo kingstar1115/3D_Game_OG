@@ -1,22 +1,26 @@
 cmake_minimum_required(VERSION 2.6)
 
 # Name of project
-set(PROJ_NAME Assignment4)
+set(PROJ_NAME "Matrix_Hell")
 project(${PROJ_NAME})
 
 # Specify project files: header files and source files
+file(GLOB SRC_LIST "*.cpp")
+file(GLOB HDR_LIST "*.h")
+file(GLOB GLS_LIST "*.glsl")
+
 set(HDRS
-    asteroid.h camera.h game.h model_loader.h resource.h resource_manager.h scene_graph.h scene_node.h
+    ${HDR_LIST}
 )
  
 set(SRCS
-   asteroid.cpp camera.cpp game.cpp main.cpp resource.cpp resource_manager.cpp scene_graph.cpp scene_node.cpp material_fp.glsl material_vp.glsl textured_material_fp.glsl textured_material_vp.glsl three-term_shiny_blue_fp.glsl three-term_shiny_blue_vp.glsl 
+   ${SRC_LIST} ${GLS_LIST}
 )
 
 # Add path name to configuration file
 configure_file(path_config.h.in path_config.h)
 
-# Add executable based on the source files
+# Add executable based on the header and source files
 add_executable(${PROJ_NAME} ${HDRS} ${SRCS})
 
 # Require OpenGL library
@@ -25,7 +29,7 @@ include_directories(${OPENGL_INCLUDE_DIR})
 target_link_libraries(${PROJ_NAME} ${OPENGL_gl_LIBRARY})
 
 # Other libraries needed
-set(LIBRARY_PATH "" CACHE PATH "Folder with GLEW, GLFW, GLM, and SOIL libraries")
+set(LIBRARY_PATH "./library")
 include_directories(${LIBRARY_PATH}/include)
 if(NOT WIN32)
     find_library(GLEW_LIBRARY GLEW)

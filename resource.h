@@ -9,7 +9,7 @@
 namespace game {
 
     // Possible resource types
-    typedef enum Type { Material, PointSet, Mesh, Texture } ResourceType;
+	typedef enum Type { Material, PointSet, Mesh, Texture, CubeMap } ResourceType;
 
     // Class that holds one resource
     class Resource {

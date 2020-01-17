@@ -9,7 +9,7 @@ in vec3 light_pos;
 in vec3 eye_position;
 
 // Uniform (global) buffer
-uniform int Flag;
+uniform int Flag = 1;
 uniform sampler2D texture_map;
 
 // Material attributes (constants)
@@ -61,7 +61,7 @@ void main()
 	float ld_direct = max(dot(N, Diectional), 0.0);
 
 	// Super shining light
-	vec4 color = vec4(1.0,0.9,0.7,0.3);
+	vec4 color = vec4(0.2,0.3,0.7,0.3);
 
 	
 	
